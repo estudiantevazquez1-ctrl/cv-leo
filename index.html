@@ -1,328 +1,446 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barbería Premium - Agendar Cita</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="STM Montevideo Electrico - Transporte publico en tiempo real">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="data:image/png;base64,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">
+  <title>STM Montevideo Electrico</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #f5f5f5;
-      color: #1a1a1a;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 40px 16px;
-    }
-    .container {
-      max-width: 480px;
-      width: 100%;
-      background: #fff;
-      border-radius: 20px;
-      padding: 32px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    }
-    .header { text-align: center; margin-bottom: 28px; }
-    .header h1 {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #c9a96e;
-    }
-    .header p { color: #888; margin-top: 6px; font-size: 14px; }
-    .form-group { margin-bottom: 18px; }
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-      color: #555;
-    }
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid #ddd;
-      border-radius: 10px;
-      font-size: 15px;
-      background: #fafafa;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .form-group input:focus, .form-group select:focus {
-      outline: none;
-      border-color: #c9a96e;
-      box-shadow: 0 0 0 3px rgba(201,169,110,0.15);
-      background: #fff;
-    }
-    .calendar-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .calendar-nav button {
-      background: #f4f4f4;
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      color: #555;
-      transition: background 0.2s;
-    }
-    .calendar-nav button:hover { background: #e8e0d0; }
-    .calendar-nav span {
-      font-weight: 700;
-      font-size: 15px;
-      color: #333;
-      text-transform: capitalize;
-    }
-    .calendar-header {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-    .calendar-header span {
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #999;
-      padding: 4px 0;
-    }
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 6px;
-      margin-top: 10px;
-    }
-    .day-cell {
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      background: #f4f4f4;
-      color: #333;
-      transition: all 0.15s;
-      border: 2px solid transparent;
-      user-select: none;
-    }
-    .day-cell:hover:not(.disabled):not(.selected) { background: #e8e0d0; }
-    .day-cell.selected {
-      background: #c9a96e;
-      color: #fff;
-      border-color: #a8894e;
-      font-weight: 700;
-    }
-    .day-cell.disabled {
-      color: #ccc;
-      cursor: not-allowed;
-      background: #fafafa;
-    }
-    .day-cell.today {
-      border-color: #c9a96e;
-      color: #c9a96e;
-      font-weight: 700;
-    }
-    .submit-btn {
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #c9a96e, #a8894e);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.2s;
-      margin-top: 10px;
-    }
-    .submit-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(201,169,110,0.35);
-    }
-    .submit-btn:active { transform: translateY(0); }
-    .success-msg {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    .success-msg h2 { color: #c9a96e; font-size: 22px; margin-bottom: 8px; }
-    .success-msg p { color: #666; font-size: 14px; line-height: 1.6; }
-    .back-btn {
-      margin-top: 20px;
-      padding: 12px 28px;
-      border: 2px solid #c9a96e;
-      background: transparent;
-      color: #c9a96e;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .back-btn:hover { background: #c9a96e; color: #fff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e17; color: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    :root { --electric: #00d4ff; --electric-glow: rgba(0,212,255,0.15); --dark-bg: #0a0e17; --card-bg: #111827; --card-raised: #1a2236; --border-electric: rgba(0,212,255,0.3); }
+    .stm-app { width: 100%; min-height: 100vh; display: flex; flex-direction: column; }
+    .stm-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: linear-gradient(135deg,#0a0e17 0%,#0f172a 100%); border-bottom: 1px solid var(--border-electric); position: sticky; top: 0; z-index: 100; }
+    .stm-logo { display: flex; align-items: center; gap: 10px; }
+    .stm-logo-mark { width: 36px; height: 36px; background: var(--electric); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0,212,255,0.4); }
+    .stm-logo-mark svg { width: 22px; height: 22px; color: #0a0e17; }
+    .stm-logo-text { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
+    .stm-logo-text span { color: var(--electric); }
+    .stm-header-actions { display: flex; gap: 8px; }
+    .stm-icon-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border-electric); background: transparent; color: var(--electric); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; -webkit-appearance: none; }
+    .stm-icon-btn:active { transform: scale(0.95); background: var(--electric-glow); }
+    .stm-icon-btn svg { width: 18px; height: 18px; }
+    .stm-search-bar { padding: 12px 20px; background: var(--card-bg); border-bottom: 1px solid var(--border-electric); }
+    .stm-search-wrap { display: flex; align-items: center; gap: 10px; background: var(--dark-bg); border: 1px solid var(--border-electric); border-radius: 12px; padding: 10px 14px; }
+    .stm-search-wrap svg { width: 18px; height: 18px; color: var(--electric); flex-shrink: 0; }
+    .stm-search-wrap input { background: transparent; border: none; outline: none; color: #fff; font-size: 15px; width: 100%; font-family: inherit; }
+    .stm-search-wrap input::placeholder { color: #6b7280; }
+    .stm-tabs { display: flex; gap: 4px; padding: 12px 20px 0; background: var(--card-bg); overflow-x: auto; scrollbar-width: none; }
+    .stm-tabs::-webkit-scrollbar { display: none; }
+    .stm-tab { padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #6b7280; transition: all 0.2s; font-family: inherit; white-space: nowrap; -webkit-appearance: none; }
+    .stm-tab.active { background: var(--electric-glow); color: var(--electric); box-shadow: 0 0 8px rgba(0,212,255,0.1); }
+    .stm-tab:active { transform: scale(0.97); }
+    .stm-content { padding: 16px 20px; background: var(--dark-bg); flex: 1; overflow-y: auto; }
+    .stm-section-title { font-size: 13px; font-weight: 500; color: #6b7280; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .stm-stop-card { background: var(--card-bg); border: 1px solid var(--border-electric); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+    .stm-stop-card:active { transform: scale(0.98); }
+    .stm-stop-card:hover, .stm-stop-card:active { background: var(--card-raised); border-color: var(--electric); }
+    .stm-stop-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--electric); border-radius: 12px 0 0 12px; opacity: 0; transition: opacity 0.2s; }
+    .stm-stop-card:hover::before, .stm-stop-card:active::before { opacity: 1; }
+    .stm-stop-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .stm-stop-name { font-size: 15px; font-weight: 500; color: #fff; }
+    .stm-stop-dist { font-size: 12px; color: var(--electric); background: var(--electric-glow); padding: 2px 8px; border-radius: 6px; }
+    .stm-stop-lines { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stm-line-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: 500; }
+    .stm-line-badge .dot { width: 6px; height: 6px; border-radius: 50%; }
+    .stm-line-1 { background: rgba(0,212,255,0.12); color: var(--electric); }
+    .stm-line-1 .dot { background: var(--electric); }
+    .stm-line-2 { background: rgba(255,107,107,0.12); color: #ff6b6b; }
+    .stm-line-2 .dot { background: #ff6b6b; }
+    .stm-line-3 { background: rgba(72,187,120,0.12); color: #48bb78; }
+    .stm-line-3 .dot { background: #48bb78; }
+    .stm-line-4 { background: rgba(237,137,54,0.12); color: #ed8936; }
+    .stm-line-4 .dot { background: #ed8936; }
+    .stm-line-5 { background: rgba(159,122,234,0.12); color: #9f7aea; }
+    .stm-line-5 .dot { background: #9f7aea; }
+    .stm-arrival-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,212,255,0.08); }
+    .stm-arrival-row:last-child { border-bottom: none; }
+    .stm-arrival-line { display: flex; align-items: center; gap: 10px; }
+    .stm-arrival-num { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; }
+    .stm-arrival-info { display: flex; flex-direction: column; }
+    .stm-arrival-dest { font-size: 14px; color: #fff; }
+    .stm-arrival-detail { font-size: 12px; color: #6b7280; }
+    .stm-arrival-time { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 500; color: var(--electric); }
+    .stm-arrival-time .live-dot { width: 6px; height: 6px; background: #48bb78; border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .stm-arrival-time.urgent { color: #ff6b6b; }
+    .stm-arrival-time.urgent .live-dot { background: #ff6b6b; }
+    .stm-fav-card { display: flex; align-items: center; gap: 12px; background: var(--card-bg); border: 1px solid var(--border-electric); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; }
+    .stm-fav-card:active { transform: scale(0.98); background: var(--card-raised); border-color: var(--electric); }
+    .stm-fav-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--electric-glow); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stm-fav-icon svg { width: 20px; height: 20px; color: var(--electric); }
+    .stm-fav-info { flex: 1; }
+    .stm-fav-title { font-size: 14px; font-weight: 500; color: #fff; }
+    .stm-fav-sub { font-size: 12px; color: #6b7280; }
+    .stm-fav-time { font-size: 16px; font-weight: 500; color: var(--electric); }
+    .stm-map-container { background: var(--card-bg); border: 1px solid var(--border-electric); border-radius: 12px; overflow: hidden; position: relative; height: 320px; }
+    .stm-map-svg { width: 100%; height: 100%; }
+    .stm-map-label { position: absolute; top: 10px; right: 10px; background: var(--card-raised); border: 1px solid var(--border-electric); border-radius: 8px; padding: 6px 10px; font-size: 11px; color: #fff; }
+    .stm-alert-banner { display: flex; align-items: center; gap: 10px; background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.3); border-radius: 10px; padding: 10px 14px; margin-bottom: 12px; }
+    .stm-alert-banner svg { width: 18px; height: 18px; color: #ff6b6b; flex-shrink: 0; }
+    .stm-alert-text { font-size: 13px; color: #ff9f9f; }
+    .stm-route-card { background: var(--card-bg); border: 1px solid var(--border-electric); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+    .stm-route-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .stm-route-num { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 500; color: #fff; }
+    .stm-route-info { flex: 1; }
+    .stm-route-name { font-size: 15px; font-weight: 500; color: #fff; }
+    .stm-route-desc { font-size: 12px; color: #6b7280; }
+    .stm-route-stops { display: flex; flex-direction: column; gap: 0; padding-left: 20px; position: relative; }
+    .stm-route-stops::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--border-electric); }
+    .stm-route-stop { display: flex; align-items: center; gap: 10px; padding: 6px 0; position: relative; }
+    .stm-route-stop::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--card-bg); border: 2px solid var(--electric); position: absolute; left: -16px; top: 50%; transform: translateY(-50%); z-index: 1; }
+    .stm-route-stop.current::before { background: var(--electric); box-shadow: 0 0 8px rgba(0,212,255,0.4); }
+    .stm-route-stop-name { font-size: 13px; color: #9ca3af; }
+    .stm-route-stop.current .stm-route-stop-name { color: #fff; font-weight: 500; }
+    .stm-route-stop-time { font-size: 12px; color: var(--electric); margin-left: auto; }
+    .stm-hidden { display: none !important; }
+    .stm-bottom-bar { display: flex; justify-content: space-around; padding: 10px 0 24px; background: var(--card-bg); border-top: 1px solid var(--border-electric); position: sticky; bottom: 0; z-index: 100; }
+    .stm-bottom-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 16px; border-radius: 10px; cursor: pointer; border: none; background: transparent; color: #6b7280; font-family: inherit; transition: all 0.2s; -webkit-appearance: none; }
+    .stm-bottom-item.active { color: var(--electric); }
+    .stm-bottom-item:active { transform: scale(0.95); }
+    .stm-bottom-item svg { width: 20px; height: 20px; }
+    .stm-bottom-item span { font-size: 11px; font-weight: 500; }
+    .stm-install-banner { position: fixed; bottom: 80px; left: 20px; right: 20px; background: var(--card-raised); border: 1px solid var(--border-electric); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; z-index: 200; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .stm-install-banner.hidden { display: none; }
+    .stm-install-text { font-size: 14px; color: #fff; }
+    .stm-install-text span { color: var(--electric); font-weight: 500; }
+    .stm-install-btn { background: var(--electric); color: #0a0e17; border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 600; cursor: pointer; -webkit-appearance: none; }
+    .stm-install-btn:active { transform: scale(0.95); }
+    .stm-detail-back { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .stm-detail-back .stm-icon-btn { width: 32px; height: 32px; }
+    .stm-detail-title { font-size: 17px; font-weight: 500; }
   </style>
-<base target="_blank">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Barbería Premium</h1>
-      <p>Reserva tu cita en minutos</p>
+  <div class="stm-app" id="stmApp">
+    <div class="stm-header">
+      <div class="stm-logo">
+        <div class="stm-logo-mark">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 001 1h1a1 1 0 001-1v-1h8v1a1 1 0 001 1h1a1 1 0 001-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4S4 2.5 4 6v10zm3.5 1c-.83 0-1.5.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-6H6V6h12v5z" fill="currentColor"/></svg>
+        </div>
+        <div class="stm-logo-text">STM <span>Montevideo</span></div>
+      </div>
+      <div class="stm-header-actions">
+        <button class="stm-icon-btn" aria-label="Notificaciones" onclick="toggleAlert()">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" fill="currentColor"/></svg>
+        </button>
+        <button class="stm-icon-btn" aria-label="Configuracion" onclick="showSettings()">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.59-.45-1.24-.82-1.93-1.09l-.36-2.54a.484.484 0 00-.48-.41h-3.84a.484.484 0 00-.48.41l-.36 2.54c-.69.27-1.34.64-1.93 1.09l-2.39-.96a.488.488 0 00-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.59.45 1.24.82 1.93 1.09l.36 2.54c.05.24.27.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.69-.27 1.34-.64 1.93-1.09l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" fill="currentColor"/></svg>
+        </button>
+      </div>
     </div>
 
-    <div id="formSection">
-      <div class="form-group">
-        <label for="nombre">Nombre completo</label>
-        <input type="text" id="nombre" placeholder="Tu nombre" />
+    <div class="stm-search-bar">
+      <div class="stm-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/></svg>
+        <input type="text" placeholder="Buscar parada, linea o direccion..." id="searchInput" oninput="filterContent()">
       </div>
-
-      <div class="form-group">
-        <label for="telefono">Número de celular</label>
-        <input type="tel" id="telefono" placeholder="Ej: 55 1234 5678" />
-      </div>
-
-      <div class="form-group">
-        <label>Selecciona una fecha</label>
-        <div class="calendar-nav">
-          <button onclick="changeMonth(-1)">‹</button>
-          <span id="monthYear"></span>
-          <button onclick="changeMonth(1)">›</button>
-        </div>
-        <div class="calendar-header">
-          <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
-        </div>
-        <div class="calendar-grid" id="calendarGrid"></div>
-      </div>
-
-      <div class="form-group">
-        <label for="hora">Hora</label>
-        <select id="hora">
-          <option value="">Selecciona una hora</option>
-          <option value="09:00">09:00 AM</option>
-          <option value="10:00">10:00 AM</option>
-          <option value="11:00">11:00 AM</option>
-          <option value="12:00">12:00 PM</option>
-          <option value="13:00">01:00 PM</option>
-          <option value="14:00">02:00 PM</option>
-          <option value="15:00">03:00 PM</option>
-          <option value="16:00">04:00 PM</option>
-          <option value="17:00">05:00 PM</option>
-          <option value="18:00">06:00 PM</option>
-          <option value="19:00">07:00 PM</option>
-          <option value="20:00">08:00 PM</option>
-        </select>
-      </div>
-
-      <button class="submit-btn" onclick="agendarCita()">Agendar Cita</button>
     </div>
 
-    <div id="successMsg" class="success-msg">
-      <h2>✓ ¡Cita agendada!</h2>
-      <p id="successDetails"></p>
-      <button class="back-btn" onclick="resetForm()">Agendar otra cita</button>
+    <div class="stm-tabs">
+      <button class="stm-tab active" data-tab="cercanas" onclick="switchTab('cercanas')">Cercanas</button>
+      <button class="stm-tab" data-tab="favoritos" onclick="switchTab('favoritos')">Favoritos</button>
+      <button class="stm-tab" data-tab="mapa" onclick="switchTab('mapa')">Mapa</button>
+      <button class="stm-tab" data-tab="lineas" onclick="switchTab('lineas')">Lineas</button>
+    </div>
+
+    <div class="stm-content">
+      <div class="stm-alert-banner" id="alertBanner">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" fill="currentColor"/></svg>
+        <span class="stm-alert-text">Linea 409 con demoras por obras en 18 de Julio. +15 min estimado.</span>
+      </div>
+
+      <div class="stm-tab-content" id="tab-cercanas">
+        <div class="stm-section-title">Paradas cercanas a tu ubicacion</div>
+        <div id="stopsList">
+          <div class="stm-stop-card" onclick="showStopDetail('Plaza Independencia')">
+            <div class="stm-stop-header"><span class="stm-stop-name">Plaza Independencia</span><span class="stm-stop-dist">120 m</span></div>
+            <div class="stm-stop-lines">
+              <span class="stm-line-badge stm-line-1"><span class="dot"></span>109</span>
+              <span class="stm-line-badge stm-line-2"><span class="dot"></span>180</span>
+              <span class="stm-line-badge stm-line-3"><span class="dot"></span>407</span>
+              <span class="stm-line-badge stm-line-4"><span class="dot"></span>DM1</span>
+            </div>
+          </div>
+          <div class="stm-stop-card" onclick="showStopDetail('18 de Julio y Ejido')">
+            <div class="stm-stop-header"><span class="stm-stop-name">18 de Julio y Ejido</span><span class="stm-stop-dist">280 m</span></div>
+            <div class="stm-stop-lines">
+              <span class="stm-line-badge stm-line-1"><span class="dot"></span>109</span>
+              <span class="stm-line-badge stm-line-2"><span class="dot"></span>409</span>
+              <span class="stm-line-badge stm-line-5"><span class="dot"></span>505</span>
+            </div>
+          </div>
+          <div class="stm-stop-card" onclick="showStopDetail('Mercedes y Rio Negro')">
+            <div class="stm-stop-header"><span class="stm-stop-name">Mercedes y Rio Negro</span><span class="stm-stop-dist">450 m</span></div>
+            <div class="stm-stop-lines">
+              <span class="stm-line-badge stm-line-3"><span class="dot"></span>407</span>
+              <span class="stm-line-badge stm-line-4"><span class="dot"></span>DM1</span>
+              <span class="stm-line-badge stm-line-5"><span class="dot"></span>505</span>
+            </div>
+          </div>
+          <div class="stm-stop-card" onclick="showStopDetail('Arenal Grande')">
+            <div class="stm-stop-header"><span class="stm-stop-name">Arenal Grande</span><span class="stm-stop-dist">680 m</span></div>
+            <div class="stm-stop-lines">
+              <span class="stm-line-badge stm-line-1"><span class="dot"></span>109</span>
+              <span class="stm-line-badge stm-line-2"><span class="dot"></span>180</span>
+              <span class="stm-line-badge stm-line-3"><span class="dot"></span>407</span>
+              <span class="stm-line-badge stm-line-4"><span class="dot"></span>DM1</span>
+              <span class="stm-line-badge stm-line-5"><span class="dot"></span>505</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stm-hidden" id="stopDetail">
+          <div class="stm-detail-back">
+            <button class="stm-icon-btn" onclick="hideStopDetail()">
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/></svg>
+            </button>
+            <span class="stm-detail-title" id="detailTitle">Plaza Independencia</span>
+          </div>
+          <div class="stm-section-title">Proximos arribos en vivo</div>
+          <div id="arrivalsList">
+            <div class="stm-arrival-row">
+              <div class="stm-arrival-line">
+                <div class="stm-arrival-num" style="background:rgba(0,212,255,0.15);color:#00d4ff;">109</div>
+                <div class="stm-arrival-info"><span class="stm-arrival-dest">Punta Carretas Shopping</span><span class="stm-arrival-detail">Cada 12 min · 3 paradas</span></div>
+              </div>
+              <div class="stm-arrival-time"><span class="live-dot"></span>3 min</div>
+            </div>
+            <div class="stm-arrival-row">
+              <div class="stm-arrival-line">
+                <div class="stm-arrival-num" style="background:rgba(255,107,107,0.15);color:#ff6b6b;">180</div>
+                <div class="stm-arrival-info"><span class="stm-arrival-dest">Ciudad Vieja</span><span class="stm-arrival-detail">Cada 15 min · 8 paradas</span></div>
+              </div>
+              <div class="stm-arrival-time"><span class="live-dot"></span>7 min</div>
+            </div>
+            <div class="stm-arrival-row">
+              <div class="stm-arrival-line">
+                <div class="stm-arrival-num" style="background:rgba(72,187,120,0.15);color:#48bb78;">407</div>
+                <div class="stm-arrival-info"><span class="stm-arrival-dest">Carrasco</span><span class="stm-arrival-detail">Cada 20 min · 12 paradas</span></div>
+              </div>
+              <div class="stm-arrival-time urgent"><span class="live-dot"></span>18 min</div>
+            </div>
+            <div class="stm-arrival-row">
+              <div class="stm-arrival-line">
+                <div class="stm-arrival-num" style="background:rgba(237,137,54,0.15);color:#ed8936;">DM1</div>
+                <div class="stm-arrival-info"><span class="stm-arrival-dest">Tres Cruces</span><span class="stm-arrival-detail">Cada 8 min · Directo</span></div>
+              </div>
+              <div class="stm-arrival-time"><span class="live-dot"></span>4 min</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stm-tab-content stm-hidden" id="tab-favoritos">
+        <div class="stm-section-title">Tus paradas favoritas</div>
+        <div class="stm-fav-card" onclick="showStopDetail('Tres Cruces')">
+          <div class="stm-fav-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg></div>
+          <div class="stm-fav-info"><div class="stm-fav-title">Tres Cruces</div><div class="stm-fav-sub">Bulevar Artigas · Lineas 109, 180, 407</div></div>
+          <div class="stm-fav-time">2 min</div>
+        </div>
+        <div class="stm-fav-card" onclick="showStopDetail('Punta Carretas')">
+          <div class="stm-fav-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg></div>
+          <div class="stm-fav-info"><div class="stm-fav-title">Punta Carretas</div><div class="stm-fav-sub">Av. Italia · Lineas 409, DM1, 505</div></div>
+          <div class="stm-fav-time">5 min</div>
+        </div>
+        <div class="stm-fav-card" onclick="showStopDetail('Ciudad Vieja')">
+          <div class="stm-fav-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg></div>
+          <div class="stm-fav-info"><div class="stm-fav-title">Ciudad Vieja</div><div class="stm-fav-sub">Peatonal Sarandi · Lineas 180, 409</div></div>
+          <div class="stm-fav-time">12 min</div>
+        </div>
+        <div class="stm-fav-card" onclick="showStopDetail('Pocitos')">
+          <div class="stm-fav-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg></div>
+          <div class="stm-fav-info"><div class="stm-fav-title">Pocitos</div><div class="stm-fav-sub">Av. Brasil · Lineas 109, 407, 505</div></div>
+          <div class="stm-fav-time">8 min</div>
+        </div>
+      </div>
+
+      <div class="stm-tab-content stm-hidden" id="tab-mapa">
+        <div class="stm-section-title">Mapa de paradas en tiempo real</div>
+        <div class="stm-map-container">
+          <svg class="stm-map-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3"/><stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0.8"/></linearGradient>
+              <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect x="0" y="0" width="400" height="320" fill="#111827"/>
+            <rect x="60" y="0" width="3" height="320" fill="rgba(0,212,255,0.06)"/>
+            <rect x="180" y="0" width="3" height="320" fill="rgba(0,212,255,0.06)"/>
+            <rect x="300" y="0" width="3" height="320" fill="rgba(0,212,255,0.06)"/>
+            <rect x="0" y="60" width="400" height="3" fill="rgba(0,212,255,0.06)"/>
+            <rect x="0" y="140" width="400" height="3" fill="rgba(0,212,255,0.06)"/>
+            <rect x="0" y="220" width="400" height="3" fill="rgba(0,212,255,0.06)"/>
+            <path d="M 60 320 Q 120 240 180 140 Q 240 80 300 20" stroke="url(#routeGrad)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M 20 60 Q 100 80 180 140 Q 260 200 340 260" stroke="rgba(255,107,107,0.4)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M 380 20 Q 340 100 300 140 Q 220 180 140 220 Q 80 240 40 260" stroke="rgba(72,187,120,0.4)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="180" cy="140" r="8" fill="#00d4ff" filter="url(#glow)"/>
+            <text x="180" y="130" text-anchor="middle" fill="#fff" font-size="9" font-family="-apple-system, sans-serif">Plaza Indep.</text>
+            <circle cx="120" cy="200" r="6" fill="#00d4ff" opacity="0.7"/>
+            <text x="120" y="190" text-anchor="middle" fill="#9ca3af" font-size="8">18 de Julio</text>
+            <circle cx="240" cy="100" r="6" fill="#00d4ff" opacity="0.7"/>
+            <text x="240" y="90" text-anchor="middle" fill="#9ca3af" font-size="8">Mercedes</text>
+            <circle cx="300" cy="60" r="6" fill="#ff6b6b" opacity="0.7"/>
+            <text x="300" y="50" text-anchor="middle" fill="#9ca3af" font-size="8">Tres Cruces</text>
+            <circle cx="80" cy="240" r="6" fill="#48bb78" opacity="0.7"/>
+            <text x="80" y="230" text-anchor="middle" fill="#9ca3af" font-size="8">Pocitos</text>
+            <circle cx="340" cy="220" r="6" fill="#ed8936" opacity="0.7"/>
+            <text x="340" y="210" text-anchor="middle" fill="#9ca3af" font-size="8">Carrasco</text>
+            <circle cx="150" cy="170" r="5" fill="#00d4ff"><animate attributeName="cx" values="120;180;240;300" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="200;140;80;20" dur="8s" repeatCount="indefinite"/></circle>
+            <circle cx="200" cy="120" r="5" fill="#ff6b6b"><animate attributeName="cx" values="60;180;300;380" dur="10s" repeatCount="indefinite"/><animate attributeName="cy" values="60;140;220;260" dur="10s" repeatCount="indefinite"/></circle>
+            <circle cx="180" cy="140" r="7" fill="#00d4ff" stroke="#fff" stroke-width="2"><animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/></circle>
+          </svg>
+          <div class="stm-map-label">2 omnibus cercanos</div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="stm-line-badge stm-line-1"><span class="dot"></span>109 — Punta Carretas</span>
+          <span class="stm-line-badge stm-line-2"><span class="dot"></span>180 — Ciudad Vieja</span>
+          <span class="stm-line-badge stm-line-3"><span class="dot"></span>407 — Carrasco</span>
+        </div>
+      </div>
+
+      <div class="stm-tab-content stm-hidden" id="tab-lineas">
+        <div class="stm-section-title">Todas las lineas</div>
+        <div class="stm-route-card">
+          <div class="stm-route-header">
+            <div class="stm-route-num" style="background:rgba(0,212,255,0.15);color:#00d4ff;">109</div>
+            <div class="stm-route-info"><div class="stm-route-name">Punta Carretas — Tres Cruces</div><div class="stm-route-desc">Frecuencia: 10-12 min · 24 paradas · 45 min</div></div>
+          </div>
+          <div class="stm-route-stops">
+            <div class="stm-route-stop current"><span class="stm-route-stop-name">Plaza Independencia (tu)</span><span class="stm-route-stop-time">Ahora</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">18 de Julio y Ejido</span><span class="stm-route-stop-time">3 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Mercedes y Rio Negro</span><span class="stm-route-stop-time">7 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Bulevar Artigas</span><span class="stm-route-stop-time">12 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Tres Cruces Terminal</span><span class="stm-route-stop-time">18 min</span></div>
+          </div>
+        </div>
+        <div class="stm-route-card">
+          <div class="stm-route-header">
+            <div class="stm-route-num" style="background:rgba(255,107,107,0.15);color:#ff6b6b;">180</div>
+            <div class="stm-route-info"><div class="stm-route-name">Ciudad Vieja — Pocitos</div><div class="stm-route-desc">Frecuencia: 15 min · 18 paradas · 35 min</div></div>
+          </div>
+          <div class="stm-route-stops">
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Ciudad Vieja</span><span class="stm-route-stop-time">0 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Plaza Independencia</span><span class="stm-route-stop-time">5 min</span></div>
+            <div class="stm-route-stop current"><span class="stm-route-stop-name">18 de Julio y Ejido</span><span class="stm-route-stop-time">8 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Pocitos Nuevo</span><span class="stm-route-stop-time">22 min</span></div>
+          </div>
+        </div>
+        <div class="stm-route-card">
+          <div class="stm-route-header">
+            <div class="stm-route-num" style="background:rgba(72,187,120,0.15);color:#48bb78;">407</div>
+            <div class="stm-route-info"><div class="stm-route-name">Carrasco — Centro</div><div class="stm-route-desc">Frecuencia: 20 min · 32 paradas · 55 min</div></div>
+          </div>
+          <div class="stm-route-stops">
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Carrasco Norte</span><span class="stm-route-stop-time">0 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Malvin</span><span class="stm-route-stop-time">12 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Pocitos</span><span class="stm-route-stop-time">25 min</span></div>
+            <div class="stm-route-stop current"><span class="stm-route-stop-name">Plaza Independencia</span><span class="stm-route-stop-time">40 min</span></div>
+          </div>
+        </div>
+        <div class="stm-route-card">
+          <div class="stm-route-header">
+            <div class="stm-route-num" style="background:rgba(237,137,54,0.15);color:#ed8936;">DM1</div>
+            <div class="stm-route-info"><div class="stm-route-name">Diferencial Montevideo 1</div><div class="stm-route-desc">Frecuencia: 8 min · 12 paradas · 30 min</div></div>
+          </div>
+          <div class="stm-route-stops">
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Tres Cruces</span><span class="stm-route-stop-time">0 min</span></div>
+            <div class="stm-route-stop current"><span class="stm-route-stop-name">Plaza Independencia</span><span class="stm-route-stop-time">6 min</span></div>
+            <div class="stm-route-stop"><span class="stm-route-stop-name">Punta Carretas</span><span class="stm-route-stop-time">15 min</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stm-bottom-bar">
+      <button class="stm-bottom-item active" data-nav="cercanas" onclick="switchTab('cercanas')">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/></svg>
+        <span>Cercanas</span>
+      </button>
+      <button class="stm-bottom-item" data-nav="favoritos" onclick="switchTab('favoritos')">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg>
+        <span>Favoritos</span>
+      </button>
+      <button class="stm-bottom-item" data-nav="mapa" onclick="switchTab('mapa')">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20.5 3l-6.5 2.5L7 3 1 6v15l6-3 7 2.5 6.5-2.5 5.5 3V6l-5.5-3zM12 18.5l-7-2.5V7l7 2.5V18.5z" fill="currentColor"/></svg>
+        <span>Mapa</span>
+      </button>
+      <button class="stm-bottom-item" data-nav="lineas" onclick="switchTab('lineas')">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm7 2h10v-2H11v2zm0-6h10v-2H11v2zm0-8v2h10V4H11z" fill="currentColor"/></svg>
+        <span>Lineas</span>
+      </button>
     </div>
   </div>
 
+  <div class="stm-install-banner hidden" id="installBanner">
+    <div class="stm-install-text">Instala <span>STM Electrico</span> en tu pantalla de inicio</div>
+    <button class="stm-install-btn" onclick="installApp()">Instalar</button>
+  </div>
+
   <script>
-    let currentDate = new Date();
-    let selectedDate = null;
-    const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-
-    function renderCalendar() {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth();
-      document.getElementById('monthYear').textContent = monthNames[month] + ' ' + year;
-
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const today = new Date();
-      const grid = document.getElementById('calendarGrid');
-      grid.innerHTML = '';
-
-      for (let i = 0; i < firstDay; i++) {
-        const empty = document.createElement('div');
-        grid.appendChild(empty);
-      }
-
-      for (let d = 1; d <= daysInMonth; d++) {
-        const cell = document.createElement('div');
-        cell.className = 'day-cell';
-        cell.textContent = d;
-        const cellDate = new Date(year, month, d);
-        const isToday = cellDate.toDateString() === today.toDateString();
-        const isPast = cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
-        if (isPast) {
-          cell.classList.add('disabled');
-        } else {
-          if (isToday) cell.classList.add('today');
-          cell.onclick = () => selectDate(d, cell);
-        }
-
-        if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
-          cell.classList.add('selected');
-        }
-
-        grid.appendChild(cell);
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('installBanner').classList.remove('hidden');
+    });
+    async function installApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') document.getElementById('installBanner').classList.add('hidden');
+        deferredPrompt = null;
+      } else {
+        alert('Para instalar: abri el menu del navegador y selecciona "Agregar a pantalla de inicio"');
       }
     }
-
-    function selectDate(day, cell) {
-      document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected'));
-      cell.classList.add('selected');
-      selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
     }
-
-    function changeMonth(dir) {
-      currentDate.setMonth(currentDate.getMonth() + dir);
-      renderCalendar();
+    function switchTab(tabName) {
+      document.querySelectorAll('.stm-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.stm-tab-content').forEach(c => c.classList.add('stm-hidden'));
+      document.querySelectorAll('.stm-bottom-item').forEach(b => b.classList.remove('active'));
+      document.querySelector('.stm-tab[data-tab="' + tabName + '"]').classList.add('active');
+      document.getElementById('tab-' + tabName).classList.remove('stm-hidden');
+      document.querySelector('.stm-bottom-item[data-nav="' + tabName + '"]').classList.add('active');
+      hideStopDetail();
     }
+    function showStopDetail(name) {
+      document.getElementById('stopsList').classList.add('stm-hidden');
+      document.getElementById('stopDetail').classList.remove('stm-hidden');
+      document.getElementById('detailTitle').textContent = name;
+      document.querySelector('#tab-cercanas .stm-section-title').style.display = 'none';
+    }
+    function hideStopDetail() {
+      document.getElementById('stopsList').classList.remove('stm-hidden');
+      document.getElementById('stopDetail').classList.add('stm-hidden');
+      document.querySelector('#tab-cercanas .stm-section-title').style.display = 'block';
+    }
+    function toggleAlert() {
+      const banner = document.getElementById('alertBanner');
+      banner.style.display = banner.style.display === 'none' ? 'flex' : 'none';
+    }
+    function showSettings() {
+      alert('Configuracion:
 
-    function agendarCita() {
-      const nombre = document.getElementById('nombre').value.trim();
-      const telefono = document.getElementById('telefono').value.trim();
-      const hora = document.getElementById('hora').value;
+• Notificaciones de arribos
+• Tema oscuro (siempre activo)
+• Unidades de distancia
+• Paradas favoritas
 
-      if (!nombre) { alert('Por favor ingresa tu nombre'); return; }
-      if (!telefono) { alert('Por favor ingresa tu número de celular'); return; }
-      if (!selectedDate) { alert('Por favor selecciona una fecha'); return; }
-      if (!hora) { alert('Por favor selecciona una hora'); return; }
-
-      const fechaStr = selectedDate.toLocaleDateString('es-MX', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+Proximamente: integracion con datos reales del STM');
+    }
+    function filterContent() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('.stm-stop-card, .stm-fav-card, .stm-route-card').forEach(card => {
+        card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
       });
-      document.getElementById('successDetails').innerHTML =
-        `<strong>${nombre}</strong><br>Tel: ${telefono}<br>${fechaStr}<br>Hora: ${hora}`;
-
-      document.getElementById('formSection').style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
     }
-
-    function resetForm() {
-      document.getElementById('nombre').value = '';
-      document.getElementById('telefono').value = '';
-      document.getElementById('hora').value = '';
-      selectedDate = null;
-      currentDate = new Date();
-      renderCalendar();
-      document.getElementById('formSection').style.display = 'block';
-      document.getElementById('successMsg').style.display = 'none';
-    }
-
-    renderCalendar();
   </script>
 </body>
 </html>

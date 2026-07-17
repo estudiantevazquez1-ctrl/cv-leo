@@ -1,1 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbería Premium - Agendar Cita</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 16px;
+    }
+    .container {
+      max-width: 480px;
+      width: 100%;
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+    .header { text-align: center; margin-bottom: 28px; }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #c9a96e;
+    }
+    .header p { color: #888; margin-top: 6px; font-size: 14px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: #c9a96e;
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.15);
+      background: #fff;
+    }
+    .calendar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .calendar-nav button {
+      background: #f4f4f4;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #555;
+      transition: background 0.2s;
+    }
+    .calendar-nav button:hover { background: #e8e0d0; }
+    .calendar-nav span {
+      font-weight: 700;
+      font-size: 15px;
+      color: #333;
+      text-transform: capitalize;
+    }
+    .calendar-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .calendar-header span {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #999;
+      padding: 4px 0;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .day-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #f4f4f4;
+      color: #333;
+      transition: all 0.15s;
+      border: 2px solid transparent;
+      user-select: none;
+    }
+    .day-cell:hover:not(.disabled):not(.selected) { background: #e8e0d0; }
+    .day-cell.selected {
+      background: #c9a96e;
+      color: #fff;
+      border-color: #a8894e;
+      font-weight: 700;
+    }
+    .day-cell.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+      background: #fafafa;
+    }
+    .day-cell.today {
+      border-color: #c9a96e;
+      color: #c9a96e;
+      font-weight: 700;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #c9a96e, #a8894e);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.2s;
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(201,169,110,0.35);
+    }
+    .submit-btn:active { transform: translateY(0); }
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-msg h2 { color: #c9a96e; font-size: 22px; margin-bottom: 8px; }
+    .success-msg p { color: #666; font-size: 14px; line-height: 1.6; }
+    .back-btn {
+      margin-top: 20px;
+      padding: 12px 28px;
+      border: 2px solid #c9a96e;
+      background: transparent;
+      color: #c9a96e;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: #c9a96e; color: #fff; }
+  </style>
+<base target="_blank">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Barbería Premium</h1>
+      <p>Reserva tu cita en minutos</p>
+    </div>
 
+    <div id="formSection">
+      <div class="form-group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" placeholder="Tu nombre" />
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Número de celular</label>
+        <input type="tel" id="telefono" placeholder="Ej: 55 1234 5678" />
+      </div>
+
+      <div class="form-group">
+        <label>Selecciona una fecha</label>
+        <div class="calendar-nav">
+          <button onclick="changeMonth(-1)">‹</button>
+          <span id="monthYear"></span>
+          <button onclick="changeMonth(1)">›</button>
+        </div>
+        <div class="calendar-header">
+          <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="hora">Hora</label>
+        <select id="hora">
+          <option value="">Selecciona una hora</option>
+          <option value="09:00">09:00 AM</option>
+          <option value="10:00">10:00 AM</option>
+          <option value="11:00">11:00 AM</option>
+          <option value="12:00">12:00 PM</option>
+          <option value="13:00">01:00 PM</option>
+          <option value="14:00">02:00 PM</option>
+          <option value="15:00">03:00 PM</option>
+          <option value="16:00">04:00 PM</option>
+          <option value="17:00">05:00 PM</option>
+          <option value="18:00">06:00 PM</option>
+          <option value="19:00">07:00 PM</option>
+          <option value="20:00">08:00 PM</option>
+        </select>
+      </div>
+
+      <button class="submit-btn" onclick="agendarCita()">Agendar Cita</button>
+    </div>
+
+    <div id="successMsg" class="success-msg">
+      <h2>✓ ¡Cita agendada!</h2>
+      <p id="successDetails"></p>
+      <button class="back-btn" onclick="resetForm()">Agendar otra cita</button>
+    </div>
+  </div>
+
+  <script>
+    let currentDate = new Date();
+    let selectedDate = null;
+    const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      document.getElementById('monthYear').textContent = monthNames[month] + ' ' + year;
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('div');
+        grid.appendChild(empty);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+        cell.textContent = d;
+        const cellDate = new Date(year, month, d);
+        const isToday = cellDate.toDateString() === today.toDateString();
+        const isPast = cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+        if (isPast) {
+          cell.classList.add('disabled');
+        } else {
+          if (isToday) cell.classList.add('today');
+          cell.onclick = () => selectDate(d, cell);
+        }
+
+        if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
+          cell.classList.add('selected');
+        }
+
+        grid.appendChild(cell);
+      }
+    }
+
+    function selectDate(day, cell) {
+      document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected'));
+      cell.classList.add('selected');
+      selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    }
+
+    function changeMonth(dir) {
+      currentDate.setMonth(currentDate.getMonth() + dir);
+      renderCalendar();
+    }
+
+    function agendarCita() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const hora = document.getElementById('hora').value;
+
+      if (!nombre) { alert('Por favor ingresa tu nombre'); return; }
+      if (!telefono) { alert('Por favor ingresa tu número de celular'); return; }
+      if (!selectedDate) { alert('Por favor selecciona una fecha'); return; }
+      if (!hora) { alert('Por favor selecciona una hora'); return; }
+
+      const fechaStr = selectedDate.toLocaleDateString('es-MX', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+      document.getElementById('successDetails').innerHTML =
+        `<strong>${nombre}</strong><br>Tel: ${telefono}<br>${fechaStr}<br>Hora: ${hora}`;
+
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }
+
+    function resetForm() {
+      document.getElementById('nombre').value = '';
+      document.getElementById('telefono').value = '';
+      document.getElementById('hora').value = '';
+      selectedDate = null;
+      currentDate = new Date();
+      renderCalendar();
+      document.getElementById('formSection').style.display = 'block';
+      document.getElementById('successMsg').style.display = 'none';
+    }
+
+    renderCalendar();
+  </script>
+</body>
+</html>
